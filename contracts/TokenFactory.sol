@@ -1,14 +1,17 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.5.0;
 
-import "./Ownable.sol";
+import "./ownable.sol";
+import "./safemath.sol";
 
 contract TokenFactory is Ownable {
 	
-	event newToken(uint tokenId, string name, string address, uint price, string image);
+	using SafeMath for uint256;
+
+	event newToken(uint tokenId, string name, string addresse, uint price, string image,bool state);
 
 	struct Token {
 		string name;
-		string address;
+		string addresse;
 		uint price;
 		string image;
 		bool state;
@@ -19,11 +22,11 @@ contract TokenFactory is Ownable {
 	mapping (uint => address) public tokenToOwner;
   mapping (address => uint) ownerTokenCount;
 
-  function _createToken(string name, string _address, uint _price, string _image) internal {
-	  uint id = tokens.push(Token(_name,_address,_price,image,0))-1;
-	  tokenToOwner[id] = msg.sender++
-	  ownerTokenCount[msg.sender];
-	  newToken(id,_namen,_address,_price,_image);
+  function createToken(string memory _name, string memory _addresse, uint _price, string memory _image) public {
+	  uint id = tokens.push(Token(_name,_addresse,_price,_image,false))-1;
+	  tokenToOwner[id] = msg.sender;
+	  ownerTokenCount[msg.sender] ++;
+	  emit newToken(id,_name,_addresse,_price,_image,false);
   }
 
 }
