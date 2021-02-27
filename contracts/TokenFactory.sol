@@ -7,7 +7,7 @@ contract TokenFactory is Ownable {
 	
 	using SafeMath for uint256;
 
-	event newToken(uint tokenId, string name, string addresse, uint price, string image,bool state);
+	event newToken(uint tokenId, string name, string addresse, uint price, string image,bool state, string description);
 
 	struct Token {
 		string name;
@@ -15,6 +15,7 @@ contract TokenFactory is Ownable {
 		uint price;
 		string image;
 		bool state;
+		string description;
 	}
 
 	Token[] public tokens;
@@ -22,11 +23,11 @@ contract TokenFactory is Ownable {
 	mapping (uint => address) public tokenToOwner;
   mapping (address => uint) ownerTokenCount;
 
-  function createToken(string memory _name, string memory _addresse, uint _price, string memory _image) public {
-	  uint id = tokens.push(Token(_name,_addresse,_price,_image,false))-1;
+  function createToken(string memory _name, string memory _addresse, uint _price, string memory _image, string memory _description) public {
+	  uint id = tokens.push(Token(_name,_addresse,_price,_image,false,_description))-1;
 	  tokenToOwner[id] = msg.sender;
 	  ownerTokenCount[msg.sender] ++;
-	  emit newToken(id,_name,_addresse,_price,_image,false);
+	  emit newToken(id,_name,_addresse,_price,_image,false,_description);
   }
 
 }

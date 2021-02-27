@@ -21,14 +21,12 @@ contract TokenHelper is TokenFactory {
     return result;
   }
 
-  function getTokensOnlineByOwner(address _owner) external view returns(uint[] memory) {
-    uint[] memory result = new uint[](ownerTokenCount[_owner]);
+  function getAllTokens() external view returns(uint[] memory) {
+    uint[] memory result = new uint[](tokens.length);
     uint counter = 0;
     for (uint i = 0; i < tokens.length; i++) {
-      if (tokenToOwner[i] == _owner && tokens[i].state == true) {
         result[counter] = i;
         counter++;
-      }
     }
     return result;
   }
