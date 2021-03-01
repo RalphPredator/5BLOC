@@ -1,1 +1,0 @@
-module.exports.Payments = require('./build/contracts/TokenOwnership')

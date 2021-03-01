@@ -1,10 +1,8 @@
-var safemath = artifacts.require("./safemath.sol");
-var tokenfactory = artifacts.require("./tokenfactory.sol");
-var tokenhelper = artifacts.require("./tokenhelper.sol");
-var tokenownership = artifacts.require("./tokenownership.sol");
+var tokenfactory = artifacts.require("../contracts/tokenfactory.sol");
+var tokenhelper = artifacts.require("../contracts/tokenhelper.sol");
+var tokenownership = artifacts.require("../contracts/tokenownership.sol");
 
 module.exports = function(deployer) {
-
 
   deployer.deploy(tokenfactory);
   deployer.link(tokenfactory, tokenhelper);
@@ -14,6 +12,4 @@ module.exports = function(deployer) {
   deployer.link(tokenhelper, tokenownership);
 
   deployer.deploy(tokenownership);
-
-  deployer.deploy(safemath);
 };
